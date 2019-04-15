@@ -25,8 +25,7 @@
 <textarea cols="40" rows="2" id="avg-sessions-output"></textarea>
 <h3>Usage by User ID</h3>
 <textarea cols="40" rows="2" id="userid-output"></textarea>
-<h3>Usage Log</h3>
-<textarea cols="40" rows="2" id="usage-log-output"></textarea>
+<h3 id="usage-log-output">Usage Log</h3>
 
 
 <script>
@@ -87,9 +86,23 @@
   }
 
   function displayUsageLog(response) {
+    const entries = response.result.reports[0].data.rows.length;
+
+    const table = document.createElement('table');
+    table.style.width = '50%';
+    table.setAttribute('border', '1');
+    const tableBody = document.createElement('tbody');
+    table.appendChild(tableBody);
+    const firstRow = document.createElement('tr');
+    const headers = ["Date", "Time (PST)", "Duration", "User ID"];
+    for (let i = 0; i < 3; i += 1) {
+      firstRow.appendChild(document.createElement('th').innerText = headers[i]);
+    }
+    tableBody.appendChild(firstRow);
+
     console.log("USAGE LOG: ", response);
     var formattedJson = JSON.stringify(response.result, null, 2);
-    document.getElementById('usage-log-output').value = formattedJson;
+    document.getElementById('usage-log-output').appendChild(table);
   }
 
   // Query the API and print the results to the page.
