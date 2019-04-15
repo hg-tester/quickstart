@@ -23,8 +23,7 @@
 <textarea cols="40" rows="2" id="total-sessions-output"></textarea>
 <h3>Avg. Session Length</h3>
 <textarea cols="40" rows="2" id="avg-sessions-output"></textarea>
-<h3>Usage by User ID</h3>
-<textarea cols="40" rows="2" id="userid-output"></textarea>
+<h3 id="userid-output">Usage by User ID</h3>
 <h3 id="usage-log-output">Usage Log</h3>
 
 
@@ -72,7 +71,51 @@
   }
   // render usage by user id
   function displayUsageByUserId (response) {
-    console.log("userid: ", response);
+    const entries = response.result.reports[0].data.rows;
+
+    // create a table
+    const table = document.createElement('table');
+    table.style.width = '50%';
+    table.setAttribute('border', '1');
+    const tableBody = document.createElement('tbody');
+    table.appendChild(tableBody);
+
+    // set the col headers
+    const firstRow = document.createElement('tr');
+    const headers = ["User ID", "Total Usage", "Sessions"];
+    for (let i = 0; i < headers.length; i += 1) {
+      let temp = document.createElement('th');
+      temp.innerText = headers[i];
+      firstRow.appendChild(temp);
+    }
+    tableBody.appendChild(firstRow);
+
+    for (let i = 0; i < entries.length; i += 1) {
+      // start a new row
+      let newRow = document.createElement('tr');
+      for (let j = 0; j < headers.length; j += 1) {
+        let data = document.createElement('td');
+        let cellData = null;
+        if (j === 0) {
+          // user
+          // somehow get the email out of the hash value eventually
+          cellData = entries[i].dimensions[0]
+        }
+        else if (j === 1) {
+          // total usage
+          cellData = entries[i].metrics[0].values[0]
+        }
+        else if (j === 2) {
+          // sessions count
+          cellData = entries[i].metrics[0].values[1]
+        }
+        // appened 
+        data.innerText = cellData
+        newRow.appendChild(data)
+      }
+      tableBody.appendChild(newRow);
+    }
+    document.getElementById('userid-output').appendChild(table);
   }
   // get usage log
   function getUsageLog() {
