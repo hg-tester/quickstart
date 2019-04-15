@@ -99,19 +99,19 @@
         if (j === 0) {
           // user
           // somehow get the email out of the hash value eventually
-          cellData = entries[i].dimensions[0]
+          cellData = entries[i].dimensions[0];
         }
         else if (j === 1) {
           // total usage
-          cellData = entries[i].metrics[0].values[0]
+          cellData = convertSecondsToTimestamp(entries[i].metrics[0].values[0]);
         }
         else if (j === 2) {
           // sessions count
-          cellData = entries[i].metrics[0].values[1]
+          cellData = entries[i].metrics[0].values[1];
         }
         // appened 
-        data.innerText = cellData
-        newRow.appendChild(data)
+        data.innerText = cellData;
+        newRow.appendChild(data);
       }
       tableBody.appendChild(newRow);
     }
