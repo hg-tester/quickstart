@@ -115,11 +115,11 @@
         let cellData = null;
         if (j === 0) {
           // date
-          cellData = `${entries[i].dimensions[2].slice(4,6)}/${entries[i].dimensions[2].slice(6,8)}/${entries[i].dimensions[2].slice(2,4)}}`
+          cellData = formatDate(entries[i].dimensions[2]);
         }
         else if (j === 1) {
           // time
-          cellData = `${parseInt(entries[i].dimensions[2].slice(8,10)) - 1}:${parseInt(entries[i].dimensions[2].slice(10))}:00`
+          cellData = createTimestamp(entries[i].dimensions[2]);
         }
         else if (j === 2) {
           // duration
@@ -127,6 +127,7 @@
         }
         else if (j === 3) {
           // user
+          // somehow get the email out of the hash value eventually
           cellData = entries[i].dimensions[0]
         }
         data.innerText = cellData
@@ -188,8 +189,30 @@
     var formattedJson = JSON.stringify(response.result, null, 2);
     document.getElementById('query-output').value = formattedJson;
   }
+
   function convertSecondsToTimestamp (seconds) {
     return new Date(seconds * 1000).toISOString().substr(11, 8)
+  }
+
+  function createTimestamp (data) {
+    // hours
+    const hours = parseInt(data.slice(8,10)) - 1
+    if (hours > 12) hours = hours - 12
+    // minutes
+    const minutes = data.slice(10)
+    // seconds
+    return `${hours}:${minutes}:00`
+  }
+
+  function formatDate (data) {
+    // month
+    const month = data.slice(4,6)
+    // day
+    const day = data.slice(6,8)
+    // year
+    const year = data.slice(2,4)
+
+    return `${month}/${day}/${year}`
   }
 </script>
 
