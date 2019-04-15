@@ -186,7 +186,7 @@
 
   function displayResults(response) {
     console.log(response);
-    var formattedJson = JSON.stringify(response.result, null, 2);
+    const formattedJson = JSON.stringify(response.result, null, 2);
     document.getElementById('query-output').value = formattedJson;
   }
 
@@ -196,21 +196,21 @@
 
   function createTimestamp (data) {
     // hours
-    const hours = parseInt(data.slice(8,10)) - 1
+    let hours = parseInt(data.slice(8,10)) - 1
     if (hours > 12) hours = hours - 12
     // minutes
-    const minutes = data.slice(10)
+    let minutes = data.slice(10)
     // seconds
     return `${hours}:${minutes}:00`
   }
 
   function formatDate (data) {
     // month
-    const month = data.slice(4,6)
+    let month = data.slice(4,6)
     // day
-    const day = data.slice(6,8)
+    let day = data.slice(6,8)
     // year
-    const year = data.slice(2,4)
+    let year = data.slice(2,4)
 
     return `${month}/${day}/${year}`
   }
