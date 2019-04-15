@@ -95,17 +95,16 @@
         let data = document.createElement('td');
         let cellData = null;
         if (j === 0) {
-          // user
-          // somehow get the email out of the hash value eventually
-          // cellData = entries[i].dimensions[0];
+          // total log in time
+          cellData = convertSecondsToTimestamp(parseInt(entries[i].metrics[0].values[1]));
         }
         else if (j === 1) {
-          // total usage
-          // cellData = convertSecondsToTimestamp(entries[i].metrics[0].values[0]);
+          // total # of sessions
+          cellData = entries[i].metrics[0].values[0];
         }
         else if (j === 2) {
-          // sessions count
-          // cellData = entries[i].metrics[0].values[1];
+          // avg session length
+          cellData = convertSecondsToTimestamp(parseInt(entries[i].metrics[0].values[2]));
         }
         // appened 
         data.innerText = cellData;
