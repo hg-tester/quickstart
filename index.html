@@ -15,6 +15,19 @@
 
 <!-- The API response will be printed here. -->
 <textarea cols="80" rows="20" id="query-output"></textarea>
+<h3>Date Range</h3>
+<textarea cols="40" rows="2" id="date-output"></textarea>
+<h3>Total Log In Time</h3>
+<textarea cols="40" rows="2" id="total-time-output"></textarea>
+<h3>Total # of Sessions</h3>
+<textarea cols="40" rows="2" id="total-sessions-output"></textarea>
+<h3>Avg. Session Length</h3>
+<textarea cols="40" rows="2" id="avg-sessions-output"></textarea>
+<h3>Usage by User ID</h3>
+<textarea cols="40" rows="2" id="userid-output"></textarea>
+<h3>Usage Log</h3>
+<textarea cols="40" rows="2" id="usage-log-output"></textarea>
+
 
 <script>
   // Replace with your view ID.
@@ -44,6 +57,9 @@
                 expression: 'ga:sessionDuration'
               },
               {
+                expression: 'ga:avgSessionDuration'
+              },
+              {
                 expression: 'ga:metric1'
               },
             ],
@@ -62,6 +78,7 @@
   }
 
   function displayResults(response) {
+    console.log(response);
     var formattedJson = JSON.stringify(response.result, null, 2);
     document.getElementById('query-output').value = formattedJson;
   }
