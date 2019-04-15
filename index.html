@@ -118,17 +118,17 @@
           // date
           cellData = `${entries[j].dimensions[2].slice(4,6)}/${entries[j].dimensions[2].slice(6,8)}/${entries[j].dimensions[2].slice(2,4)}}`
         }
-        else if (i === 1) {
+        else if (j === 1) {
           // time
           cellData = `${parseInt(entries[j].dimensions[2].slice(8,10)) - 1}:${parseInt(entries[j].dimensions[2].slice(10))}:00`
         }
-        else if (i === 2) {
+        else if (j === 2) {
           // duration
-          cellData = convertSecondsToTimestamp(parseInt(entries[i].metrics[0].values[0]));
+          cellData = convertSecondsToTimestamp(parseInt(entries[j].metrics[0].values[0]));
         }
-        else if (i === 3) {
+        else if (j === 3) {
           // user
-          cellData = entries[i].dimensions[0]
+          cellData = entries[j].dimensions[0]
         }
         data.innerText = cellData
         newRow.appendChild(data)
