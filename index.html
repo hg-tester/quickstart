@@ -34,7 +34,7 @@
 
   function queryReports() {
     getUsageLog();
-    testReport();
+    usageByUserId();
   }
   // get usage by user id
   function usageByUserId () {
@@ -72,7 +72,7 @@
   }
   // render usage by user id
   function displayUsageByUserId (response) {
-    console.log(response);
+    console.log("userid: ", response);
   }
   // get usage log
   function getUsageLog() {
