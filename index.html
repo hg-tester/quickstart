@@ -33,8 +33,56 @@
   // Replace with your view ID.
   var VIEW_ID = '192100723';
 
-  // Query the API and print the results to the page.
   function queryReports() {
+    getUsageLog();
+    testReport();
+  }
+
+  function getUsageLog() {
+    gapi.client.request({
+      path: '/v4/reports:batchGet',
+      root: 'https://analyticsreporting.googleapis.com/',
+      method: 'POST',
+      body: {
+        reportRequests: [
+          {
+            viewId: VIEW_ID,
+            dateRanges: [
+              {
+                startDate: '7daysAgo',
+                endDate: 'today'
+              }
+            ],
+            metrics: [
+              {
+                expression: 'ga:sessionDuration'
+              }
+            ],
+            dimensions: [
+              {
+                name: 'ga:dimension1',
+              },
+              {
+                name: 'ga:eventCategory',
+              },
+              {
+                name: 'ga:dateHourMinute',
+              }
+            ]
+          }
+        ]
+      }
+    }).then(displayUsageLog, console.error.bind(console));
+  }
+
+  function displayUsageLog(response) {
+    console.log("USAGE LOG: ", response);
+    var formattedJson = JSON.stringify(response.result, null, 2);
+    document.getElementById('usage-log-output').value = formattedJson;
+  }
+
+  // Query the API and print the results to the page.
+  function testReport() {
     gapi.client.request({
       path: '/v4/reports:batchGet',
       root: 'https://analyticsreporting.googleapis.com/',
@@ -68,7 +116,7 @@
                 name: 'ga:dimension1',
               },
               {
-                name: 'ga:dimension2',
+                name: 'ga:eventCategory',
               }
             ]
           }
