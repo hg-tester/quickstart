@@ -109,17 +109,18 @@
     // for every entry
     for (let i = 0; i <= entries.length; i += 1) {
       // start a new row
-      for (let i = 0; i < headers.length; i += 1) {
-        let newRow = document.createElement('tr');
+      let newRow;
+      for (let j = 0; j < headers.length; j += 1) {
+        newRow = document.createElement('tr');
         let data = document.createElement('td');
         let cellData = null;
-        if (i === 0) {
+        if (j === 0) {
           // date
-          cellData = `${entries[i].dimensions[2].slice(4,6)}/${entries[i].dimensions[2].slice(6,8)}/${entries[i].dimensions[2].slice(2,4)}}`
+          cellData = `${entries[j].dimensions[2].slice(4,6)}/${entries[j].dimensions[2].slice(6,8)}/${entries[j].dimensions[2].slice(2,4)}}`
         }
         else if (i === 1) {
           // time
-          cellData = `${parseInt(entries[i].dimensions[2].slice(8,10)) - 1}:${parseInt(entries[i].dimensions[2].slice(10))}:00`
+          cellData = `${parseInt(entries[j].dimensions[2].slice(8,10)) - 1}:${parseInt(entries[j].dimensions[2].slice(10))}:00`
         }
         else if (i === 2) {
           // duration
@@ -131,8 +132,8 @@
         }
         data.innerText = cellData
         newRow.appendChild(data)
-        tableBody.appendChild(newRow);
       }
+      tableBody.appendChild(newRow);
     }
     console.log("USAGE LOG: ", response);
     var formattedJson = JSON.stringify(response.result, null, 2);
