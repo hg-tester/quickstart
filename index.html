@@ -34,6 +34,41 @@
   function queryReports() {
     getUsageLog();
     usageByUserId();
+    overviewStats();
+  }
+  function overviewStats() {
+    gapi.client.request({
+      path: '/v4/reports:batchGet',
+      root: 'https://analyticsreporting.googleapis.com/',
+      method: 'POST',
+      body: {
+        reportRequests: [
+          {
+            viewId: VIEW_ID,
+            dateRanges: [
+              {
+                startDate: '7daysAgo',
+                endDate: 'today'
+              }
+            ],
+            metrics: [
+              {
+                expression: 'ga:sessions'
+              },
+              {
+                expression: 'ga:sessionDuration'
+              },
+              {
+                expression: 'ga:avgSessionDuration'
+              }
+            ],
+          }
+        ]
+      }
+    }).then(displayUsageByUserId, console.error.bind(console));
+  }
+  function displayOverview (response) {
+    console.log(response)
   }
   // get usage by user id
   function usageByUserId () {
