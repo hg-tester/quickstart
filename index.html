@@ -36,7 +36,45 @@
     getUsageLog();
     testReport();
   }
-
+  // get usage by user id
+  function usageByUserId () {
+    gapi.client.request({
+      path: '/v4/reports:batchGet',
+      root: 'https://analyticsreporting.googleapis.com/',
+      method: 'POST',
+      body: {
+        reportRequests: [
+          {
+            viewId: VIEW_ID,
+            dateRanges: [
+              {
+                startDate: '7daysAgo',
+                endDate: 'today'
+              }
+            ],
+            metrics: [
+              {
+                expression: 'ga:sessionDuration'
+              },
+              {
+                expression: 'ga:sessions'
+              }
+            ],
+            dimensions: [
+              {
+                name: 'ga:dimension1',
+              },
+            ],
+          }
+        ]
+      }
+    }).then(displayUsageByUserId, console.error.bind(console));
+  }
+  // render usage by user id
+  function displayUsageByUserId (response) {
+    console.log(response);
+  }
+  // get usage log
   function getUsageLog() {
     gapi.client.request({
       path: '/v4/reports:batchGet',
@@ -84,7 +122,7 @@
       }
     }).then(displayUsageLog, console.error.bind(console));
   }
-
+  // render usage log
   function displayUsageLog(response) {
     const entries = response.result.reports[0].data.rows;
 
@@ -130,13 +168,12 @@
           // somehow get the email out of the hash value eventually
           cellData = entries[i].dimensions[0]
         }
+        // appened 
         data.innerText = cellData
         newRow.appendChild(data)
       }
       tableBody.appendChild(newRow);
     }
-    console.log("USAGE LOG: ", response);
-    var formattedJson = JSON.stringify(response.result, null, 2);
     document.getElementById('usage-log-output').appendChild(table);
   }
 
