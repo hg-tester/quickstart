@@ -68,6 +68,17 @@
               {
                 name: 'ga:dateHourMinute',
               }
+            ],
+            dimensionFilterClauses: [
+              {
+                filters: [
+                  {
+                    dimensionName: "ga:eventCategory",
+                    operator: "EXACT",
+                    expressions: ["LOGIN"]
+                  }
+                ]
+              }
             ]
           }
         ]
