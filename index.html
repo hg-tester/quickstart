@@ -65,7 +65,7 @@
           }
         ]
       }
-    }).then(displayUsageByUserId, console.error.bind(console));
+    }).then(displayOverview, console.error.bind(console));
   }
   function displayOverview (response) {
     console.log(response)
@@ -179,7 +179,6 @@
         if (j === 0) {
           // user
           // somehow get the email out of the hash value eventually
-          console.log(entries);
           cellData = entries[i].dimensions[0];
         }
         else if (j === 1) {
