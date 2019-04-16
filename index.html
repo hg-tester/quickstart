@@ -66,8 +66,8 @@
     form.appendChild(submit);
   }
 
-  function updateDate() {
-    preventDefault();
+  function updateDate(event) {
+    event.preventDefault();
     const start = document.getElementById('start-date').value
     const end = document.getElementById('end-date').value
     if (validateDate()) {
