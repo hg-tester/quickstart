@@ -20,8 +20,6 @@
   End Date: <input type="date" name="end" id="endDate" value="value">
   <input type="submit">
 </form>
-
-<textarea cols="40" rows="2" id="date-output">Current default is past 7 days</textarea>
 <h3 id="overview">Overview</h3>
 <h3 id="userid-output">Usage by User ID</h3>
 <h3 id="usage-log-output">Usage Log</h3>
@@ -32,6 +30,10 @@
   var VIEW_ID = '192100723';
 
   function queryReports() {
+    const start = document.getElementById('startDate').value
+    const end = document.getElementById('endDate').value
+    console.log(start)
+    console.log(end)
     getUsageLog();
     usageByUserId();
     overviewStats();
