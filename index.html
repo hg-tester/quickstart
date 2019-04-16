@@ -32,11 +32,11 @@
   function renderButton() {
     // create the form
     const form = document.createElement('form');
-    form.setAttribute('onsubmit', 'return updateDate();');
+    form.setAttribute("onsubmit", "return updateDate();");
     // start text
     const startText = document.createElement('p');
     startText.innerText = "Start Date: "
-    startText.setAttribute('style', "display: inline");
+    startText.setAttribute("style", "display: inline");
     form.appendChild(startText);
     // start date
     const startInput = document.createElement('input');
@@ -73,6 +73,8 @@
   }
 
   function updateDate() {
+    preventDefault();
+    alert("it works");
     const start = document.getElementById('start-date').value
     const end = document.getElementById('end-date').value
     if (validateDate()) {
