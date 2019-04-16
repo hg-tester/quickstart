@@ -61,10 +61,10 @@
     submit.setAttribute('value', "Query Usage Data");
     form.appendChild(submit);
     // add it to the dom
-    // find the date area
+    // find the date area and insert the form after
     const body = document.getElementById('date-range').parentNode
     const dateArea = document.getElementById('date-range');
-    body.insertBefore(form, dateArea);
+    body.insertBefore(form, dateArea.nextSibling);
   }
 
   function updateDate() {
