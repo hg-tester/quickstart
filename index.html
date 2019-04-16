@@ -30,8 +30,6 @@
   var VIEW_ID = '192100723';
 
   function renderButton() {
-    // find the date area
-    const dateArea = document.getElementById('date-range');
     // create the form
     const form = document.createElement('form');
     form.setAttribute('onsubmit', 'return updateDate();');
@@ -63,7 +61,9 @@
     submit.setAttribute('value', "Query Usage Data");
     form.appendChild(submit);
     // add it to the dom
-    const body = document.getElementsByTagName('body');
+    // find the date area
+    const body = document.getElementById('date-range').parentNode
+    const dateArea = document.getElementById('date-range');
     body.insertBefore(form, dateArea);
   }
 
