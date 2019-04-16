@@ -15,11 +15,11 @@
 
 <!-- The API response will be printed here. -->
 <h3 id="date-range">Date Range: </h3>
-<!-- <form onsubmit="return updateDate();">
-  Start Date: <input type="date" name="start" id="start-date" value="value">
+<form id="the-form" onsubmit="return updateDate();">
+  <!-- Start Date: <input type="date" name="start" id="start-date" value="value">
   End Date: <input type="date" name="end" id="endDate" value="value">
-  <input type="submit">
-</form> -->
+  <input type="submit"> -->
+</form>
 <h3 id="overview">Overview</h3>
 <h3 id="userid-output">Usage by User ID</h3>
 <h3 id="usage-log-output">Usage Log</h3>
@@ -31,8 +31,7 @@
 
   function renderButton() {
     // create the form
-    const form = document.createElement('form');
-    form.setAttribute("onsubmit", "return updateDate();");
+    const form = document.getElementById('the-form');
     // start text
     const startText = document.createElement('p');
     startText.innerText = "Start Date: "
@@ -65,11 +64,6 @@
     submit.setAttribute('value', "Query Usage Data");
     submit.setAttribute('style', 'display: inline');
     form.appendChild(submit);
-    // add it to the dom
-    // find the date area and insert the form after
-    const body = document.getElementById('date-range').parentNode
-    const dateArea = document.getElementById('date-range');
-    body.insertBefore(form, dateArea.nextSibling);
   }
 
   function updateDate() {
