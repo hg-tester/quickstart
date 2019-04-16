@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h1>Hello Analytics Reporting API V4</h1>
+<h1>SAMPLE PROVIDENCE REPORT</h1>
 
 <!-- The Sign-in button. This will run `queryReports()` on success. -->
 <p class="g-signin2" data-onsuccess="renderButton"></p>
@@ -81,11 +81,11 @@
   }
 
   function queryReports(start, end) {
-    console.log(typeof start, typeof end)
     overviewStats(start, end);
-    usageByUserId(start, end));
+    usageByUserId(start, end);
     getUsageLog(start, end);
   }
+  // get overview stats
   function overviewStats() {
     gapi.client.request({
       path: '/v4/reports:batchGet',
@@ -117,6 +117,7 @@
       }
     }).then(displayOverview, console.error.bind(console));
   }
+  // render overview display
   function displayOverview (response) {
     const entries = response.result.reports[0].data.rows;
 
