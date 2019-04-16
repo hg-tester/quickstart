@@ -63,6 +63,7 @@
     submit.setAttribute('value', "Query Usage Data");
     form.appendChild(submit);
     // add it to the dom
+    const body = document.getElementsByTagName('body');
     body.insertBefore(form, dateArea);
   }
 
