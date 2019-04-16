@@ -121,6 +121,13 @@
   function displayOverview (response) {
     const entries = response.result.reports[0].data.rows;
 
+    if(!entries.length) {
+      const error = document.createElement('p');
+      error.innerText = "No Data"
+      document.getElementById('overview').appendChild(error);
+      return;
+    }
+
     // check for an existing table
     const existingTable = document.getElementById('display-overview');
     if (existingTable) {
@@ -207,7 +214,13 @@
   // render usage by user id
   function displayUsageByUserId (response) {
     const entries = response.result.reports[0].data.rows;
-    // check for existing table
+    // error handling
+    if(!entries.length) {
+      const error = document.createElement('p');
+      error.innerText = "No Data"
+      document.getElementById('userid-output').appendChild(error);
+      return;
+    }
     // check for an existing table
     const existingTable = document.getElementById('usage-by-userid');
     if (existingTable) {
@@ -309,6 +322,13 @@
   // render usage log
   function displayUsageLog(response) {
     const entries = response.result.reports[0].data.rows;
+    // error handling
+    if(!entries.length) {
+      const error = document.createElement('p');
+      error.innerText = "No Data"
+      document.getElementById('usage-log-output').appendChild(error);
+      return;
+    }
     // check for an existing table
     const existingTable = document.getElementById('usage-log');
     if (existingTable) {
