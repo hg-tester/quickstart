@@ -86,7 +86,7 @@
     getUsageLog(start, end);
   }
   // get overview stats
-  function overviewStats() {
+  function overviewStats(start, end) {
     gapi.client.request({
       path: '/v4/reports:batchGet',
       root: 'https://analyticsreporting.googleapis.com/',
@@ -171,7 +171,7 @@
     document.getElementById('overview').appendChild(table);
   }
   // get usage by user id
-  function usageByUserId () {
+  function usageByUserId (start, end) {
     gapi.client.request({
       path: '/v4/reports:batchGet',
       root: 'https://analyticsreporting.googleapis.com/',
@@ -259,7 +259,7 @@
     document.getElementById('userid-output').appendChild(table);
   }
   // get usage log
-  function getUsageLog() {
+  function getUsageLog(start, end) {
     gapi.client.request({
       path: '/v4/reports:batchGet',
       root: 'https://analyticsreporting.googleapis.com/',
