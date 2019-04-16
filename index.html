@@ -36,6 +36,7 @@
     // start text
     const startText = document.createElement('p');
     startText.innerText = "Start Date: "
+    startText.setAttribute('style', "display: inline");
     form.appendChild(startText);
     // start date
     const startInput = document.createElement('input');
@@ -43,10 +44,12 @@
     startInput.setAttribute('name', 'start');
     startInput.setAttribute('id', 'start-date');
     startInput.setAttribute('value', 'value');
+    startInput.setAttribute('style', 'margin:');
     form.appendChild(startInput);
     // end text
     const endText = document.createElement('p');
     endText.innerText = "End Date: "
+    endText.setAttribute('style', "display: inline");
     form.appendChild(endText);
     // end date
     const endInput = document.createElement('input');
@@ -54,12 +57,13 @@
     endInput.setAttribute('name', 'end');
     endInput.setAttribute('id', 'end-date');
     endInput.setAttribute('value', 'value');
+    endInput.setAttribute('style', 'margin: 1rem;');
     form.appendChild(endInput);
     // submit button
     const submit = document.createElement('input');
     submit.setAttribute('type', 'submit');
     submit.setAttribute('value', "Query Usage Data");
-    submit.setAttribute('style', 'display=block');
+    submit.setAttribute('style', 'display: inline');
     form.appendChild(submit);
     // add it to the dom
     // find the date area and insert the form after
