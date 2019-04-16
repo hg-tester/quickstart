@@ -70,7 +70,7 @@
     event.preventDefault();
     const start = document.getElementById('start-date').value
     const end = document.getElementById('end-date').value
-    if (validateDate()) {
+    if (validateDate(start, end)) {
       alert("it works");
       queryReports(start, end)
     }
