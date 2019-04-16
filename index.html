@@ -15,7 +15,7 @@
 
 <!-- The API response will be printed here. -->
 <h3>Date Range: </h3>
-<form onsubmit="updateDate">
+<form onsubmit="return updateDate();">
   Start Date: <input type="date" name="start" id="startDate" value="value">
   End Date: <input type="date" name="end" id="endDate" value="value">
   <input type="submit">
@@ -29,11 +29,11 @@
   // Replace with your view ID.
   var VIEW_ID = '192100723';
   function updateDate() {
-    preventDefault() 
     const start = document.getElementById('startDate').value
     const end = document.getElementById('endDate').value
     alert(start)
     alert(end)
+    return false
   }
 
   function queryReports() {
@@ -75,7 +75,7 @@
   }
   function displayOverview (response) {
     const entries = response.result.reports[0].data.rows;
-
+    // check for an existing table
     // create a table
     const table = document.createElement('table');
     table.style.width = '50%';
