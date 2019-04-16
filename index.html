@@ -28,19 +28,19 @@
 <script>
   // Replace with your view ID.
   var VIEW_ID = '192100723';
+
   function updateDate() {
     const start = document.getElementById('startDate').value
     const end = document.getElementById('endDate').value
-    alert(start)
-    alert(end)
+    queryReports(start, end)
     return false;
   }
 
-  function queryReports() {
-    
-    getUsageLog();
-    usageByUserId();
+  function queryReports(start, end) {
+    console.log(typeof start, typeof end)
     overviewStats();
+    usageByUserId();
+    getUsageLog();
   }
   function overviewStats() {
     gapi.client.request({
@@ -76,10 +76,15 @@
   function displayOverview (response) {
     const entries = response.result.reports[0].data.rows;
     // check for an existing table
+    const existingTable = document.getElementById('display-overview');
+    if (existingTable) {
+      existingTable.parentNode.removeChild(existingTable);
+    }
     // create a table
     const table = document.createElement('table');
     table.style.width = '50%';
     table.setAttribute('border', '1');
+    table.setAttribute('id', 'display-overview');
     const tableBody = document.createElement('tbody');
     table.appendChild(tableBody);
 
