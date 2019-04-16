@@ -30,32 +30,40 @@
   var VIEW_ID = '192100723';
 
   function renderButton() {
+    // find the date area
     const dateArea = document.getElementById('date-range');
+    // create the form
     const form = document.createElement('form');
     form.setAttribute('onsubmit', 'return updateDate();');
+    // start text
     const startText = document.createElement('p');
     startText.innerText = "Start Date: "
     form.appendChild(startText);
+    // start date
     const startInput = document.createElement('input');
     startInput.setAttribute('type', 'date');
     startInput.setAttribute('name', 'start');
     startInput.setAttribute('id', 'start-date');
     startInput.setAttribute('value', 'value');
     form.appendChild(startInput);
+    // end text
     const endText = document.createElement('p');
     endText.innerText = "End Date: "
     form.appendChild(endText);
+    // end date
     const endInput = document.createElement('input');
     endInput.setAttribute('type', 'date');
     endInput.setAttribute('name', 'end');
     endInput.setAttribute('id', 'end-date');
     endInput.setAttribute('value', 'value');
     form.appendChild(endInput);
+    // submit button
     const submit = document.createElement('input');
     submit.setAttribute('type', 'submit');
     submit.setAttribute('value', "Query Usage Data");
     form.appendChild(submit);
-    dateArea.append(form);
+    // add it to the dom
+    dateArea.parentNode.insertBefore(form, element.nextSibling);
   }
 
   function updateDate() {
