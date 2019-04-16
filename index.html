@@ -11,15 +11,15 @@
 <h1>Hello Analytics Reporting API V4</h1>
 
 <!-- The Sign-in button. This will run `queryReports()` on success. -->
-<p class="g-signin2" data-onsuccess="queryReports"></p>
+<p class="g-signin2" data-onsuccess="renderButton"></p>
 
 <!-- The API response will be printed here. -->
-<h3>Date Range: </h3>
-<form onsubmit="return updateDate();">
-  Start Date: <input type="date" name="start" id="startDate" value="value">
+<h3 id="date-range">Date Range: </h3>
+<!-- <form onsubmit="return updateDate();">
+  Start Date: <input type="date" name="start" id="start-date" value="value">
   End Date: <input type="date" name="end" id="endDate" value="value">
   <input type="submit">
-</form>
+</form> -->
 <h3 id="overview">Overview</h3>
 <h3 id="userid-output">Usage by User ID</h3>
 <h3 id="usage-log-output">Usage Log</h3>
@@ -29,9 +29,29 @@
   // Replace with your view ID.
   var VIEW_ID = '192100723';
 
+  function renderButton() {
+    const dateArea = document.getElementById('date-range');
+    const form = document.createElement('form');
+    form.setAttribute('onsubmit', 'return updateDate();');
+    const startInput = document.createElement('input');
+    startInput.setAttribute('type', 'date');
+    startInput.setAttribute('name', 'start');
+    startInput.setAttribute('id', 'start-date');
+    startInput.setAttribute('value', 'value');
+    const endInput = document.createElement('input');
+    endInput.setAttribute('type', 'date');
+    endInput.setAttribute('name', 'end');
+    endInput.setAttribute('id', 'end-date');
+    endInput.setAttribute('value', 'value');
+    const submit = document.createElement('input');
+    submit.setAttribute('value', "Query Usage Data");
+    form.innerHTML = `"Start Date: "${startInput} "End Date: " ${endInput}${submit}`
+    dateArea.appendChild(form);
+  }
+
   function updateDate() {
-    const start = document.getElementById('startDate').value
-    const end = document.getElementById('endDate').value
+    const start = document.getElementById('start-date').value
+    const end = document.getElementById('end-date').value
     queryReports(start, end)
     return false;
   }
