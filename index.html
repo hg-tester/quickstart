@@ -71,15 +71,20 @@
   function updateDate() {
     const start = document.getElementById('start-date').value
     const end = document.getElementById('end-date').value
-    queryReports(start, end)
+    if (validateDate()) {
+      queryReports(start, end)
+    }
+    else {
+      alert(`Incorrect Date! "End Date" must be after "Start Date" \n Start: ${start} \n End: ${end}`);
+    }
     return false;
   }
 
   function queryReports(start, end) {
     console.log(typeof start, typeof end)
-    overviewStats();
-    usageByUserId();
-    getUsageLog();
+    overviewStats(start, end);
+    usageByUserId(start, end));
+    getUsageLog(start, end);
   }
   function overviewStats() {
     gapi.client.request({
@@ -92,8 +97,8 @@
             viewId: VIEW_ID,
             dateRanges: [
               {
-                startDate: '7daysAgo',
-                endDate: 'today'
+                startDate: start,
+                endDate: end
               }
             ],
             metrics: [
@@ -114,6 +119,7 @@
   }
   function displayOverview (response) {
     const entries = response.result.reports[0].data.rows;
+
     // check for an existing table
     const existingTable = document.getElementById('display-overview');
     if (existingTable) {
@@ -175,8 +181,8 @@
             viewId: VIEW_ID,
             dateRanges: [
               {
-                startDate: '7daysAgo',
-                endDate: 'today'
+                startDate: start,
+                endDate: end
               }
             ],
             metrics: [
@@ -200,11 +206,17 @@
   // render usage by user id
   function displayUsageByUserId (response) {
     const entries = response.result.reports[0].data.rows;
-
+    // check for existing table
+    // check for an existing table
+    const existingTable = document.getElementById('usage-by-userid');
+    if (existingTable) {
+      existingTable.parentNode.removeChild(existingTable);
+    }
     // create a table
     const table = document.createElement('table');
     table.style.width = '50%';
     table.setAttribute('border', '1');
+    table.setAttribute('id', 'usage-by-userid');
     const tableBody = document.createElement('tbody');
     table.appendChild(tableBody);
 
@@ -257,8 +269,8 @@
             viewId: VIEW_ID,
             dateRanges: [
               {
-                startDate: '7daysAgo',
-                endDate: 'today'
+                startDate: start,
+                endDate: end
               }
             ],
             metrics: [
@@ -296,11 +308,16 @@
   // render usage log
   function displayUsageLog(response) {
     const entries = response.result.reports[0].data.rows;
-
+    // check for an existing table
+    const existingTable = document.getElementById('usage-log');
+    if (existingTable) {
+      existingTable.parentNode.removeChild(existingTable);
+    }
     // create a table
     const table = document.createElement('table');
     table.style.width = '50%';
     table.setAttribute('border', '1');
+    table.setAttribute('id', 'usage-log');
     const tableBody = document.createElement('tbody');
     table.appendChild(tableBody);
 
@@ -348,55 +365,9 @@
     document.getElementById('usage-log-output').appendChild(table);
   }
 
-  // Query the API and print the results to the page.
-  function testReport() {
-    gapi.client.request({
-      path: '/v4/reports:batchGet',
-      root: 'https://analyticsreporting.googleapis.com/',
-      method: 'POST',
-      body: {
-        reportRequests: [
-          {
-            viewId: VIEW_ID,
-            dateRanges: [
-              {
-                startDate: '7daysAgo',
-                endDate: 'today'
-              }
-            ],
-            metrics: [
-              {
-                expression: 'ga:sessions'
-              },
-              {
-                expression: 'ga:sessionDuration'
-              },
-              {
-                expression: 'ga:avgSessionDuration'
-              },
-              {
-                expression: 'ga:metric1'
-              },
-            ],
-            dimensions: [
-              {
-                name: 'ga:dimension1',
-              },
-              {
-                name: 'ga:eventCategory',
-              }
-            ]
-          }
-        ]
-      }
-    }).then(displayResults, console.error.bind(console));
-  }
-
-  function displayResults(response) {
-    console.log(response);
-    const formattedJson = JSON.stringify(response.result, null, 2);
-    document.getElementById('query-output').value = formattedJson;
-  }
+  /*
+      Helper Functions
+  */
 
   function convertSecondsToTimestamp (seconds) {
     return new Date(seconds * 1000).toISOString().substr(11, 8)
@@ -421,6 +392,12 @@
     let year = data.slice(2,4)
 
     return `${month}/${day}/${year}`
+  }
+
+  function valdiateDate(start, end) {
+    const startDate = Date.parse(start);
+    const endDate = Date.parse(end);
+    return startDate < endDate
   }
 </script>
 
