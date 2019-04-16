@@ -45,7 +45,11 @@
     endInput.setAttribute('value', 'value');
     const submit = document.createElement('input');
     submit.setAttribute('value', "Query Usage Data");
-    form.innerHTML = `"Start Date: "${startInput} "End Date: " ${endInput}${submit}`
+    form.innerText = "Start Date: "
+    form.appendChild(startInput);
+    form.innerText += "End Date: " 
+    form.appendChild(endInput);
+    form.appendChild(submit);
     dateArea.appendChild(form);
   }
 
