@@ -121,7 +121,7 @@
   function displayOverview (response) {
     const entries = response.result.reports[0].data.rows;
 
-    if(!entries.length) {
+    if(!entries) {
       const error = document.createElement('p');
       error.innerText = "No Data"
       document.getElementById('overview').appendChild(error);
@@ -215,7 +215,7 @@
   function displayUsageByUserId (response) {
     const entries = response.result.reports[0].data.rows;
     // error handling
-    if(!entries.length) {
+    if(!entries) {
       const error = document.createElement('p');
       error.innerText = "No Data"
       document.getElementById('userid-output').appendChild(error);
@@ -323,7 +323,7 @@
   function displayUsageLog(response) {
     const entries = response.result.reports[0].data.rows;
     // error handling
-    if(!entries.length) {
+    if(!entries) {
       const error = document.createElement('p');
       error.innerText = "No Data"
       document.getElementById('usage-log-output').appendChild(error);
