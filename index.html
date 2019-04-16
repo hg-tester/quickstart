@@ -33,23 +33,29 @@
     const dateArea = document.getElementById('date-range');
     const form = document.createElement('form');
     form.setAttribute('onsubmit', 'return updateDate();');
+    const startText = document.createElement('p');
+    startText.innerText = "Start Date: "
+    form.appendChild(startText);
     const startInput = document.createElement('input');
     startInput.setAttribute('type', 'date');
     startInput.setAttribute('name', 'start');
     startInput.setAttribute('id', 'start-date');
     startInput.setAttribute('value', 'value');
+    form.appendChild(startInput);
+    const endText = document.createElement('p');
+    endText.innerText = "End Date: "
+    form.appendChild(endText);
     const endInput = document.createElement('input');
     endInput.setAttribute('type', 'date');
     endInput.setAttribute('name', 'end');
     endInput.setAttribute('id', 'end-date');
     endInput.setAttribute('value', 'value');
+    form.appendChild(endInput);
     const submit = document.createElement('input');
     submit.setAttribute('type', 'submit');
     submit.setAttribute('value', "Query Usage Data");
-    form.appendChild(startInput);
-    form.appendChild(endInput);
     form.appendChild(submit);
-    dateArea.appendChild(form);
+    dateArea.append(form);
   }
 
   function updateDate() {
