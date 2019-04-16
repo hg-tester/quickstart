@@ -15,7 +15,7 @@
 
 <!-- The API response will be printed here. -->
 <h3>Date Range: </h3>
-<form>
+<form onsubmit="updateDate">
   Start Date: <input type="date" name="start" id="startDate" value="value">
   End Date: <input type="date" name="end" id="endDate" value="value">
   <input type="submit">
@@ -28,12 +28,16 @@
 <script>
   // Replace with your view ID.
   var VIEW_ID = '192100723';
-
-  function queryReports() {
+  function updateDate() {
+    preventDefault() 
     const start = document.getElementById('startDate').value
     const end = document.getElementById('endDate').value
-    console.log(start)
-    console.log(end)
+    alert(start)
+    alert(end)
+  }
+
+  function queryReports() {
+    
     getUsageLog();
     usageByUserId();
     overviewStats();
